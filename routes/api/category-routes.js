@@ -9,7 +9,7 @@ router.get('/', (req, res) => {
   Category.findAndCountAll({
     include: [
       {model: Product,
-      attr: ['id', 'product_name', 'stock', 'price', 'category_id']}
+      attr: ['id', 'product_name', 'stock', 'price', 'categoryID']}
     ]
   })
   .then(() => 
@@ -26,7 +26,7 @@ router.get('/:id', (req, res) => {
     include: [
       {
         model: Product,
-        attr: ['id', 'product_name', 'stock', 'price', 'category_id']
+        attr: ['id', 'product_name', 'stock', 'price', 'categoryID']
       }
     ]
   })
@@ -37,14 +37,32 @@ router.get('/:id', (req, res) => {
 
 router.post('/', (req, res) => {
   // create a new category
+  Category.create({
+    categoryName: req.body.categoryName
+  })
+  .then((data) => res.json(data))
 });
 
 router.put('/:id', (req, res) => {
   // update a category by its `id` value
+  Category.update(req.body, {
+    location: {
+      id: req.params.id
+    }
+  })
+  .then((data) => {
+    res.json(data)
+  })
 });
 
 router.delete('/:id', (req, res) => {
   // delete a category by its `id` value
+  Category.delete({
+    location: {
+      id: req.params.id
+    }
+  })
+  .then((data) => res.json(data))
 });
 
 module.exports = router;
