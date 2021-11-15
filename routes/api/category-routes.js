@@ -9,7 +9,7 @@ router.get('/', (req, res) => {
   Category.findAndCountAll({
     include: [
       {model: Product,
-      attr: ['id', 'product_name', 'stock', 'price', 'categoryID']}
+      attr: ['id', 'productName', 'stock', 'price', 'categoryID']}
     ]
   })
   .then(() => 
@@ -26,7 +26,7 @@ router.get('/:id', (req, res) => {
     include: [
       {
         model: Product,
-        attr: ['id', 'product_name', 'stock', 'price', 'categoryID']
+        attr: ['id', 'productName', 'stock', 'price', 'categoryID']
       }
     ]
   })
